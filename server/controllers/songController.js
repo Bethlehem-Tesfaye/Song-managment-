@@ -35,15 +35,13 @@ export const getSongs = async (req, res, next) => {
       return next(new CustomError("no song found", 404));
     }
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        songs: songs,
-        page,
-        songPerPage,
-        message: "song retrived"
-      });
+    return res.status(200).json({
+      success: true,
+      songs: songs,
+      page,
+      songPerPage,
+      message: "song retrived"
+    });
   } catch (error) {
     return next(error);
   }
