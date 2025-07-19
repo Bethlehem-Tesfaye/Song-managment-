@@ -5,7 +5,6 @@ import router from "./routes/songRoutes.js";
 import errorMiddleware from "./middlewares/errorMiddleware.js";
 import cors from "cors";
 
-
 dotenv.config();
 
 const port = process.env.PORT || 5000;
@@ -19,8 +18,8 @@ app.use(
 );
 
 app.use(express.json());
-app.use('/api/songs', router)
-app.use(errorMiddleware)
+app.use("/api/songs", router);
+app.use(errorMiddleware);
 
 DbConnect();
 app.listen(port, () => {

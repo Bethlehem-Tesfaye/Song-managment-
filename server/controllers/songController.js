@@ -37,7 +37,13 @@ export const getSongs = async (req, res, next) => {
 
     return res
       .status(200)
-      .json({ success: true, songs: songs, page, songPerPage, message: "song retrived" });
+      .json({
+        success: true,
+        songs: songs,
+        page,
+        songPerPage,
+        message: "song retrived"
+      });
   } catch (error) {
     return next(error);
   }
@@ -53,13 +59,11 @@ export const updateSong = async (req, res, next) => {
     if (!song) {
       return next(new CustomError("song not found", 404));
     }
-    return res
-      .status(200)
-      .json({
-        success: true,
-        song: song,
-        message: "Song updated successfully"
-      });
+    return res.status(200).json({
+      success: true,
+      song: song,
+      message: "Song updated successfully"
+    });
   } catch (error) {
     return next(error);
   }
