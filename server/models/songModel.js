@@ -11,6 +11,6 @@ const songSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const songModel = mongoose.models.Song || mongoose.model("Song", userSchema);
+const songModel = mongoose.models.Song || mongoose.model("Song", songSchema);
 
 export default songModel;
