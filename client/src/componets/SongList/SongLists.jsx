@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import Pagination from '../Pagination/Pagination.jsx';
+import React from "react";
+import styled from "@emotion/styled";
+import Pagination from "../Pagination/Pagination.jsx";
 
 const Container = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  background-color: ${props => props.theme.colors.primaryBackground};
+  background-color: ${(props) => props.theme.colors.primaryBackground};
   padding: 15px;
   border-radius: 10px;
   box-sizing: border-box;
@@ -19,19 +19,19 @@ const SongRow = styled.div`
   justify-content: space-between;
   padding: 15px 30px;
   flex-wrap: wrap;
-  background-color: ${props => props.theme.colors.listBackground};
+  background-color: ${(props) => props.theme.colors.listBackground};
   border-radius: 8px;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 `;
 
 const Label = styled.span`
   font-weight: 500;
   margin-right: 10px;
-  color: ${props => props.theme.colors.label};
+  color: ${(props) => props.theme.colors.label};
 `;
 
 const Value = styled.span`
-  color: ${props => props.theme.colors.value};
+  color: ${(props) => props.theme.colors.value};
 `;
 
 const Field = styled.div`
@@ -55,7 +55,7 @@ const EditButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   color: #000;
-  background-color: ${props =>props.theme.colors.editBtn};
+  background-color: ${(props) => props.theme.colors.editBtn};
   &:hover {
     opacity: 0.9;
   }
@@ -67,7 +67,7 @@ const DeleteButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   color: #000;
-  background-color: ${props =>props.theme.colors.deleteBtn};
+  background-color: ${(props) => props.theme.colors.deleteBtn};
   &:hover {
     opacity: 0.9;
   }
@@ -75,48 +75,47 @@ const DeleteButton = styled.button`
 
 export default function SongLists() {
   return (
-    <><Container>
+    <>
+      <Container>
         <SongRow>
-            <SongBlock>
-              <Field>
-                <Label>Title:</Label>
-                <Value>title</Value>
-              </Field>
-              <Field>
-                <Label>Artist:</Label>
-                <Value> artist</Value>
-              </Field>
-            </SongBlock>
+          <SongBlock>
+            <Field>
+              <Label>Title:</Label>
+              <Value>title</Value>
+            </Field>
+            <Field>
+              <Label>Artist:</Label>
+              <Value> artist</Value>
+            </Field>
+          </SongBlock>
 
-            <SongBlock>
-              <Field>
-                <Label>Album:</Label>
-                <Value> album</Value>
-              </Field>
-              <Field>
-                <Label>Year:</Label>
-                <Value>year</Value>
-              </Field>
-            </SongBlock>
+          <SongBlock>
+            <Field>
+              <Label>Album:</Label>
+              <Value> album</Value>
+            </Field>
+            <Field>
+              <Label>Year:</Label>
+              <Value>year</Value>
+            </Field>
+          </SongBlock>
 
-            <SongBlock>
-              <Field>
-                <Label>Genre:</Label>
-                <Value>genre</Value>
-              </Field>
-            </SongBlock>
+          <SongBlock>
+            <Field>
+              <Label>Genre:</Label>
+              <Value>genre</Value>
+            </Field>
+          </SongBlock>
 
-            <SongBlock>
-              <Field>
-                <EditButton>edit</EditButton>
-                <DeleteButton>delete</DeleteButton>
-              </Field>
-            </SongBlock>
-          </SongRow>
-    </Container>
-    <Pagination/>
+          <SongBlock>
+            <Field>
+              <EditButton>edit</EditButton>
+              <DeleteButton>delete</DeleteButton>
+            </Field>
+          </SongBlock>
+        </SongRow>
+      </Container>
+      <Pagination />
     </>
-    
-    
   );
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
 const Form = styled.form`
   display: flex;
@@ -33,63 +33,40 @@ const Heading = styled.h2`
 
 const Input = styled.input`
   border: 1px solid #d1d5db;
-  padding: 12px  10px;
+  padding: 12px 10px;
   border-radius: 5px;
 `;
 
 const Button = styled.button`
   border: 1px solid #d1d5db;
-  background-color:rgb(127, 174, 230);
-  padding: 12px  10px;
+  background-color: rgb(127, 174, 230);
+  padding: 12px 10px;
   border-radius: 15px;
   cursor: pointer;
 `;
 
 const Cancel = styled.p`
   margin-left: 15px;
-  color: #ef4444; 
+  color: #ef4444;
   cursor: pointer;
 `;
 
-export default function SongForm({
-}) {
+export default function SongForm({}) {
   return (
-    <Form >
+    <Form>
       <Heading>Add New Song</Heading>
 
-      <Input
-        type="text"
-        placeholder="Title"
-        value={title}
-         />
+      <Input type="text" placeholder="Title" value={title} />
 
-      <Input
-        type="text"
-        placeholder="Artist"
-        value={artist}
-       />
+      <Input type="text" placeholder="Artist" value={artist} />
 
-      <Input
-        type="text"
-        placeholder="Album"
-        value={album}
-        />
+      <Input type="text" placeholder="Album" value={album} />
 
-      <Input
-        type="number"
-        placeholder="Year"
-        value={year}
-      />
+      <Input type="number" placeholder="Year" value={year} />
 
-      <Input
-        type="text"
-        placeholder="Genre"
-        value={genre}
-      />
+      <Input type="text" placeholder="Genre" value={genre} />
 
-      <Button type="submit">
-       Add Song
-      </Button>
+      <Button type="submit">Add Song</Button>
 
       <Cancel>Cancel</Cancel>
     </Form>

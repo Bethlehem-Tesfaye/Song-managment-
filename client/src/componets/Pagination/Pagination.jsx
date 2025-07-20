@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from '@emotion/styled';
+import React, { useState } from "react";
+import styled from "@emotion/styled";
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -18,13 +18,13 @@ const PageButton = styled.button`
   cursor: pointer;
   transition: background 0.2s ease;
 `;
- 
+
 const PageInfo = styled.span`
   font-weight: 600;
   color: #374151;
 `;
 
-const  Pagination=()=> {
+const Pagination = () => {
   const [currentPage, setCurrentPage] = useState(8);
   const totalPages = 12;
 
@@ -51,6 +51,6 @@ const  Pagination=()=> {
       </PageButton>
     </PaginationWrapper>
   );
-}
+};
 
-export default Pagination
+export default Pagination;

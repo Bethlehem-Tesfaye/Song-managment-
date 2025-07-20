@@ -4,12 +4,13 @@ import NavBar from "./componets/NavBar/NavBar.jsx";
 import SongForm from "./componets/SongForm/SongForm.jsx";
 
 function App() {
-  return <div>
-    <NavBar/>
-    <SongLists/>
-    {/* <SongForm/> */}
-
-  </div>;
+  return (
+    <div>
+      <NavBar />
+      <SongLists />
+      {/* <SongForm/> */}
+    </div>
+  );
 }
 
 export default App;
