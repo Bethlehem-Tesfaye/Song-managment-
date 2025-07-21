@@ -16,30 +16,35 @@ export const createSong = async (req, res, next) => {
       genre
     });
     await newSong.save();
-    return res.status(200).json({ success: true, message: "Song added" });
+    return res
+      .status(200)
+      .json({ success: true, song: newSong, message: "Song added" });
   } catch (error) {
     return next(error);
   }
 };
 
 export const getSongs = async (req, res, next) => {
-  const page = req.query.page || 0;
+  const page = parseInt(req.query.page) || 1;
   const songPerPage = 5;
 
   try {
+    const totalSongs = await songModel.countDocuments();
     const songs = await songModel
       .find()
-      .skip(page * songPerPage)
+      .skip((page - 1) * songPerPage)
       .limit(songPerPage);
     if (songs.length === 0) {
       return next(new CustomError("no song found", 404));
     }
+    const totalPage = Math.ceil(totalSongs / songPerPage);
 
     return res.status(200).json({
       success: true,
       songs: songs,
       page,
       songPerPage,
+      totalPage,
       message: "song retrived"
     });
   } catch (error) {

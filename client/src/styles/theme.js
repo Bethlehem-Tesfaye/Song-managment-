@@ -1,4 +1,4 @@
-export const theme = {
+export const lightTheme = {
   colors: {
     primaryBackground: "#F3F5F7",
     listBackground: "#E5E6E3",
@@ -7,5 +7,17 @@ export const theme = {
     editBtn: "#FBC897",
     addBtn: "#C1E1C2",
     value: "#000000"
+  }
+};
+
+export const darkTheme = {
+  colors: {
+    primaryBackground: "#353535",
+    listBackground: "#2c2c2c",
+    label: "#ffffff",
+    deleteBtn: "#f87171",
+    editBtn: "#fbbf24",
+    addBtn: "#34d399",
+    value: "#ffffff"
   }
 };
