@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Sun, Moon } from "lucide-react";
 
 export const Container = styled.div`
   display: flex;
@@ -31,6 +32,16 @@ export const AddButton = styled.button`
   color: #000;
   background-color: ${(props) => props.theme.colors.addBtn};
   &:hover {
-    opacity: 0.9;
+    background-color: rgb(27, 131, 18);
   }
+`;
+
+export const SunIcon = styled(Sun)`
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.value};
+`;
+
+export const MoonIcon = styled(Moon)`
+  cursor: pointer;
+  color: ${(props) => props.theme.colors.value};
 `;

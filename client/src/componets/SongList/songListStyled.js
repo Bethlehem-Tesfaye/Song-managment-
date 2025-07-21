@@ -55,7 +55,7 @@ export const EditButton = styled.button`
   color: #000;
   background-color: ${(props) => props.theme.colors.editBtn};
   &:hover {
-    opacity: 0.9;
+    background-color: rgb(168, 89, 11);
   }
 `;
 
@@ -67,7 +67,7 @@ export const DeleteButton = styled.button`
   color: #000;
   background-color: ${(props) => props.theme.colors.deleteBtn};
   &:hover {
-    opacity: 0.9;
+    background-color: rgb(177, 64, 113);
   }
 `;
 

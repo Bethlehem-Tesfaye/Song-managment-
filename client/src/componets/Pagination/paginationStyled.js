@@ -16,6 +16,9 @@ export const PageButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s ease;
+  &:hover {
+    background-color: rgb(121, 119, 119);
+  }
 `;
 
 export const PageInfo = styled.span`

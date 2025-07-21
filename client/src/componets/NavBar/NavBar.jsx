@@ -1,9 +1,15 @@
 import React from "react";
-import { Sun, Moon } from "lucide-react";
 import { openModal } from "../../redux/feature/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setTolight, setToDark } from "../../redux/feature/themeSlice";
-import { Container, Logo, Field, AddButton } from "./NavBarStyled.js";
+import {
+  Container,
+  Logo,
+  Field,
+  AddButton,
+  SunIcon,
+  MoonIcon
+} from "./NavBarStyled.js";
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -15,9 +21,9 @@ function NavBar() {
         <Logo>Song App</Logo>
         <Field>
           {isDark ? (
-            <Sun onClick={() => dispatch(setTolight())} />
+            <SunIcon onClick={() => dispatch(setTolight())} />
           ) : (
-            <Moon onClick={() => dispatch(setToDark())} />
+            <MoonIcon onClick={() => dispatch(setToDark())} />
           )}
           <AddButton onClick={() => dispatch(openModal({ isEdit: false }))}>
             Add
