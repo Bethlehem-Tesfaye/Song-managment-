@@ -19,16 +19,6 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
-        include: /node_modules/,
-        use: ["style-loader", "css-loader"]
-      },
-      {
-        test: /\.css$/i,
-        include: path.resolve(__dirname, "src"),
-        use: ["style-loader", "css-loader"]
-      },
-      {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,
         type: "asset/resource"
       }
