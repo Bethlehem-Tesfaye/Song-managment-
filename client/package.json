@@ -5,7 +5,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open --mode development",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -15,12 +16,18 @@
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "dotenv-webpack": "^8.1.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.0.4",
     "prettier": "^3.6.2",
+    "redux-mock-store": "^1.5.5",
     "style-loader": "^4.0.0",
     "webpack": "^5.100.2",
     "webpack-dev-server": "^5.2.2"
