@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
+import { closeModal } from "../../redux/feature/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createSongRequest,
+  updateSongRequest
+} from "../../redux/feature/songsSLice";
 
 const Form = styled.form`
   display: flex;
@@ -8,7 +14,7 @@ const Form = styled.form`
   padding: 25px 25px;
   margin: 5rem auto 0 auto;
   border: 1px solid #d1d5db;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.primaryBackground};
   border-radius: 15px;
   width: 80%;
 
@@ -39,7 +45,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   border: 1px solid #d1d5db;
-  background-color: rgb(127, 174, 230);
+  background-color: ${(props) => props.theme.colors.addBtn};
   padding: 12px 10px;
   border-radius: 15px;
   cursor: pointer;
@@ -51,24 +57,90 @@ const Cancel = styled.p`
   cursor: pointer;
 `;
 
-export default function SongForm({}) {
+export default function SongForm() {
+  const dispatch = useDispatch();
+  const { isEdit, selectedSong } = useSelector((state) => state.modal);
+
+  const [formData, setFormData] = useState({
+    title: selectedSong?.title || "",
+    artist: selectedSong?.artist || "",
+    album: selectedSong?.album || "",
+    year: selectedSong?.year || "",
+    genre: selectedSong?.genre || ""
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isEdit) {
+      dispatch(
+        updateSongRequest({ id: selectedSong._id, updatedSong: formData })
+      );
+      window.alert(" song updated!");
+    } else {
+      dispatch(createSongRequest(formData));
+      window.alert("new song added!");
+    }
+    dispatch(closeModal());
+  };
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
   return (
-    <Form>
-      <Heading>Add New Song</Heading>
+    <Form onSubmit={handleSubmit}>
+      <Heading>{isEdit ? "Edit" : "Add"} Song</Heading>
 
-      <Input type="text" placeholder="Title" value={title} />
+      <Input
+        type="text"
+        placeholder="Title"
+        name="title"
+        value={formData.title}
+        onChange={handleChange}
+        required
+      />
 
-      <Input type="text" placeholder="Artist" value={artist} />
+      <Input
+        type="text"
+        placeholder="Artist"
+        name="artist"
+        value={formData.artist}
+        onChange={handleChange}
+        required
+      />
 
-      <Input type="text" placeholder="Album" value={album} />
+      <Input
+        type="text"
+        placeholder="Album"
+        name="album"
+        value={formData.album}
+        onChange={handleChange}
+        required
+      />
 
-      <Input type="number" placeholder="Year" value={year} />
+      <Input
+        type="number"
+        placeholder="Year"
+        name="year"
+        value={formData.year}
+        onChange={handleChange}
+        required
+      />
 
-      <Input type="text" placeholder="Genre" value={genre} />
+      <Input
+        type="text"
+        placeholder="Genre"
+        name="genre"
+        value={formData.genre}
+        onChange={handleChange}
+      />
 
-      <Button type="submit">Add Song</Button>
+      <Button type="submit">{isEdit ? "Edit" : "Add"} Song</Button>
 
-      <Cancel>Cancel</Cancel>
+      <Cancel onClick={() => dispatch(closeModal())}>Cancel</Cancel>
     </Form>
   );
 }

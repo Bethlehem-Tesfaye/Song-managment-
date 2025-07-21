@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import Pagination from "../Pagination/Pagination.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteSongRequest,
+  fetchSongsRequest
+} from "../../redux/feature/songsSLice.js";
+import SongForm from "../SongForm/SongForm.jsx";
+import { openModal } from "../../redux/feature/modalSlice.js";
 
 const Container = styled.div`
   display: flex;
@@ -73,49 +80,103 @@ const DeleteButton = styled.button`
   }
 `;
 
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5); /* dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
 export default function SongLists() {
+  const dispatch = useDispatch();
+  const { songs, isLoading } = useSelector((state) => state.songs);
+  const { isModalOpen } = useSelector((state) => state.modal);
+
+  useEffect(() => {
+    dispatch(fetchSongsRequest(1));
+  }, [dispatch]);
+
+  const handleEdit = (song) => {
+    dispatch(openModal({ isEdit: true, song }));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteSongRequest(id));
+    window.alert("song deleted!");
+  };
+
+  if (isLoading) return <p>Loading...</p>;
   return (
     <>
+      {isModalOpen && (
+        <Modal>
+          <SongForm />
+        </Modal>
+      )}
       <Container>
-        <SongRow>
-          <SongBlock>
-            <Field>
-              <Label>Title:</Label>
-              <Value>title</Value>
-            </Field>
-            <Field>
-              <Label>Artist:</Label>
-              <Value> artist</Value>
-            </Field>
-          </SongBlock>
+        {!songs
+          ? "No Song "
+          : songs.map((song, index) => (
+              <div key={song._id}>
+                <SongRow>
+                  <SongBlock>
+                    <Field>
+                      <Label>Title:</Label>
+                      <Value>{song.title}</Value>
+                    </Field>
+                    <Field>
+                      <Label>Artist:</Label>
+                      <Value>{song.artist}</Value>
+                    </Field>
+                  </SongBlock>
 
-          <SongBlock>
-            <Field>
-              <Label>Album:</Label>
-              <Value> album</Value>
-            </Field>
-            <Field>
-              <Label>Year:</Label>
-              <Value>year</Value>
-            </Field>
-          </SongBlock>
+                  <SongBlock>
+                    <Field>
+                      <Label>Album:</Label>
+                      <Value>{song.album}</Value>
+                    </Field>
+                    <Field>
+                      <Label>Year:</Label>
+                      <Value>{song.year}</Value>
+                    </Field>
+                  </SongBlock>
 
-          <SongBlock>
-            <Field>
-              <Label>Genre:</Label>
-              <Value>genre</Value>
-            </Field>
-          </SongBlock>
+                  <SongBlock>
+                    <Field>
+                      <Label>Genre:</Label>
+                      <Value>{song.genre || "N/A"}</Value>
+                    </Field>
+                  </SongBlock>
 
-          <SongBlock>
-            <Field>
-              <EditButton>edit</EditButton>
-              <DeleteButton>delete</DeleteButton>
-            </Field>
-          </SongBlock>
-        </SongRow>
+                  <SongBlock>
+                    <Field>
+                      <EditButton
+                        onClick={() => {
+                          handleEdit(song);
+                        }}
+                      >
+                        edit
+                      </EditButton>
+                      <DeleteButton
+                        onClick={() => {
+                          handleDelete(song._id);
+                        }}
+                      >
+                        delete
+                      </DeleteButton>
+                    </Field>
+                  </SongBlock>
+                </SongRow>
+              </div>
+            ))}
+        <Pagination />
       </Container>
-      <Pagination />
     </>
   );
 }

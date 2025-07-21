@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSongsRequest } from "../../redux/feature/songsSLice.js";
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -21,34 +23,50 @@ const PageButton = styled.button`
 
 const PageInfo = styled.span`
   font-weight: 600;
-  color: #374151;
+  color: ${(props) => props.theme.colors.value};
 `;
 
 const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(8);
-  const totalPages = 12;
+  const { songs, isLoading, page, totalPage } = useSelector(
+    (state) => state.songs
+  );
+
+  const dispatch = useDispatch();
+  const totalPages = totalPage;
 
   const goPrev = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+    if (page > 1 && !isLoading) {
+      dispatch(fetchSongsRequest(page - 1));
+    }
   };
 
   const goNext = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    if (page < totalPages && !isLoading) {
+      dispatch(fetchSongsRequest(page + 1));
+    }
   };
 
   return (
     <PaginationWrapper>
-      <PageButton onClick={goPrev} disabled={currentPage === 1}>
-        Previous
-      </PageButton>
+      {page !== 1 ? (
+        <PageButton onClick={goPrev} disabled={page === 1}>
+          Previous
+        </PageButton>
+      ) : (
+        ""
+      )}
 
       <PageInfo>
-        Page {currentPage} of {totalPages}
+        Page {page} of {totalPages}
       </PageInfo>
 
-      <PageButton onClick={goNext} disabled={currentPage === totalPages}>
-        Next
-      </PageButton>
+      {page !== totalPages ? (
+        <PageButton onClick={goNext} disabled={page === totalPages}>
+          Next
+        </PageButton>
+      ) : (
+        ""
+      )}
     </PaginationWrapper>
   );
 };

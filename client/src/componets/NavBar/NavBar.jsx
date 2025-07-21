@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { Sun, Moon } from "lucide-react";
+import { openModal } from "../../redux/feature/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setTolight, setToDark } from "../../redux/feature/themeSlice";
 
 const Container = styled.div`
   display: flex;
@@ -38,18 +41,22 @@ const AddButton = styled.button`
 `;
 
 function NavBar() {
-  const [isDark, setIsDark] = useState(true);
+  const dispatch = useDispatch();
+  const { isDark } = useSelector((state) => state.theme);
+
   return (
     <div>
       <Container>
         <Logo>Song App</Logo>
         <Field>
           {isDark ? (
-            <Sun onClick={() => setIsDark(!isDark)} />
+            <Sun onClick={() => dispatch(setTolight())} />
           ) : (
-            <Moon onClick={() => setIsDark(!isDark)} />
+            <Moon onClick={() => dispatch(setToDark())} />
           )}
-          <AddButton>Add</AddButton>
+          <AddButton onClick={() => dispatch(openModal({ isEdit: false }))}>
+            Add
+          </AddButton>
         </Field>
       </Container>
     </div>
