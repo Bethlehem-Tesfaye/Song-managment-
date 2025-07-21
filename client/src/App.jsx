@@ -20,7 +20,7 @@ function App() {
           }
         `}
       />
-       <Suspense fallback={<p>Loading NavBar...</p>}>
+      <Suspense fallback={<p>Loading NavBar...</p>}>
         <NavBar />
       </Suspense>
 
