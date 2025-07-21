@@ -1,61 +1,11 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
 import { closeModal } from "../../redux/feature/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createSongRequest,
   updateSongRequest
 } from "../../redux/feature/songsSLice";
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 25px 25px;
-  margin: 5rem auto 0 auto;
-  border: 1px solid #d1d5db;
-  background-color: ${(props) => props.theme.colors.primaryBackground};
-  border-radius: 15px;
-  width: 80%;
-
-  @media (min-width: 640px) {
-    width: 60%;
-  }
-  @media (min-width: 768px) {
-    width: 50%;
-  }
-  @media (min-width: 1024px) {
-    width: 40%;
-  }
-  @media (min-width: 1280px) {
-    width: 30%;
-  }
-`;
-
-const Heading = styled.h2`
-  font-size: 25px;
-  font-weight: 600;
-`;
-
-const Input = styled.input`
-  border: 1px solid #d1d5db;
-  padding: 12px 10px;
-  border-radius: 5px;
-`;
-
-const Button = styled.button`
-  border: 1px solid #d1d5db;
-  background-color: ${(props) => props.theme.colors.addBtn};
-  padding: 12px 10px;
-  border-radius: 15px;
-  cursor: pointer;
-`;
-
-const Cancel = styled.p`
-  margin-left: 15px;
-  color: #ef4444;
-  cursor: pointer;
-`;
+import { Form, Heading, Input, Button, Cancel } from "./songFormStyled.js";
 
 export default function SongForm() {
   const dispatch = useDispatch();
