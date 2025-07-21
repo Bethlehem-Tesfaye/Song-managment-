@@ -1,23 +1,39 @@
 # Song Management App
 
-## table of contents
-- [Project overview](#project-overview)
-- [Tech stack](#tech-stack)
-- [Set up instruction](#setup-instruction)
-- [Webpack configuration](#webpack-configuration)
-- [Api endpoint](#api-endpoints)
-- [AI usage](#ai-usage)
-- [Deployment links](#deployment-links)
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Tech Stack](#tech-stack)
+- [Setup Instructions](#setup-instructions)
+- [Webpack Configuration](#webpack-configuration)
+- [API Endpoints](#api-endpoints)
+- [AI Usage](#ai-usage)
+- [Additional Resources](#learning-resources)
+- [Deployment Links](#deployment-links)
 
 ---
 
-## Project overview
-A full-stack application that manges songs with CRUD
-## Tech stack
+## Project Overview
+A full-stack application that manages songs with CRUD operations.
+## Tech Stack
 - Frontend: ReactJS, Redux Toolkit, Redux-Saga, Emotion, Webpack
 - Backend: Node.js, Express, MongoDB
-## Set up instruction
+## Setup Instructions
 
+```bash
+# Clone the repository
+git clone https://github.com/Bethlehem-Tesfaye/Song-management-.git
+cd Song-management-
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm start
+
+# Build for production
+npm run build
+
+```
 ## Webpack configuration
 
 The project is manually set up with Webpack for full control over the build process. Below are the detailed steps followed to configure it:
@@ -162,8 +178,52 @@ Used React `createRoot` API which mounts the app inside the `<div id="root"></di
 
 ---
 
-## Api endpoint
+## API Endpoints
 
-## AI usage
+The backend provides the following RESTful API endpoints for managing songs:
 
-## Deployment links
+Base URL:  
+https://song-management-server.onrender.com/api/songs
+
+### Endpoints
+
+```http
+GET    /        -> Get all songs (paginated)  
+POST   /        -> Create a new song  
+PUT    /:id     -> Update an existing song by ID  
+DELETE /:id     -> Delete a song by ID  
+
+```
+
+## AI Usage
+
+I used AI tools (such as ChatGPT) to assist with various parts of this project, including:
+
+- Writing and formatting this README
+- Suggesting commit and merge message names
+- Helping with modal design and styled-components style suggestions
+- Formatting,including setting up the GitHub Actions linting workflow (`.yml` file)
+- Leveraging AI to better understand errors and guide troubleshooting
+
+### Important Notes on AI Usage
+
+- I reviewed and made sure I understood the code and configurations suggested by AI before using them.
+
+
+## Additional Resources
+
+During this project, I referred to the following materials for guidance:
+
+- [Traversy Media - webpack setup](https://www.youtube.com/watch?v=IZGNcSuwBZs&t=1295s&ab_channel=TraversyMedia)
+- [Prateek Surana - Using Environment Variables with Webpack](https://prateeksurana.me/blog/using-environment-variables-with-webpack/)
+- [CodeWithVishal - Redux-Saga Tutorial](https://www.youtube.com/watch?v=DPOzlL1fpnU&t=484s&ab_channel=CodeWithVishal)
+- [Great Frontend - Code Splitting and Lazy Loading in React](https://www.greatfrontend.com/blog/code-splitting-and-lazy-loading-in-react)
+- [PedroTech - Jest Testing Tutorial](https://www.youtube.com/watch?v=JBSUgDxICg8&t=840s&ab_channel=PedroTech)
+
+---
+
+## Deployment Links
+
+- **Frontend:** [https://song-list-management-app.netlify.app/](https://song-list-management-app.netlify.app/)
+- **Backend API:** [https://song-management-server.onrender.com/](https://song-management-server.onrender.com/)
+
