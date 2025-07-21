@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "@emotion/styled";
 import Pagination from "../Pagination/Pagination.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,90 +7,17 @@ import {
 } from "../../redux/feature/songsSLice.js";
 import SongForm from "../SongForm/SongForm.jsx";
 import { openModal } from "../../redux/feature/modalSlice.js";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  background-color: ${(props) => props.theme.colors.primaryBackground};
-  padding: 15px;
-  border-radius: 10px;
-  box-sizing: border-box;
-`;
-
-const SongRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  flex-wrap: wrap;
-  background-color: ${(props) => props.theme.colors.listBackground};
-  border-radius: 8px;
-  margin-bottom: 15px;
-`;
-
-const Label = styled.span`
-  font-weight: 500;
-  margin-right: 10px;
-  color: ${(props) => props.theme.colors.label};
-`;
-
-const Value = styled.span`
-  color: ${(props) => props.theme.colors.value};
-`;
-
-const Field = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  min-width: 150px;
-  gap: 10px;
-`;
-
-const SongBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 15px 0;
-  flex: 1 1 200px;
-`;
-
-const EditButton = styled.button`
-  padding: 7px 13px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #000;
-  background-color: ${(props) => props.theme.colors.editBtn};
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-const DeleteButton = styled.button`
-  padding: 7px 13px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #000;
-  background-color: ${(props) => props.theme.colors.deleteBtn};
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-const Modal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background: rgba(0, 0, 0, 0.5); /* dim background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
+import {
+  Container,
+  SongRow,
+  Label,
+  Value,
+  Field,
+  SongBlock,
+  EditButton,
+  DeleteButton,
+  Modal
+} from "./songListStyled.js";
 
 export default function SongLists() {
   const dispatch = useDispatch();
