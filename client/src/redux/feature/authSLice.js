@@ -24,7 +24,7 @@ const authSLice = createSlice({
     registerUserFailure(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-      state.user = {};
+      state.user = null;
       state.isLoggedOut = false;
     },
     loginUserRequest(state) {
@@ -41,7 +41,7 @@ const authSLice = createSlice({
     loginUserFailure(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-      state.user = {};
+      state.user = null;
       state.isLoggedOut = false; // reset on login fail
     },
     logoutRequest(state) {
