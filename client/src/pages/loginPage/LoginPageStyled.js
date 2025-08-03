@@ -54,7 +54,7 @@ export const Button = styled.button`
   transition: 0.2s ease;
 
   &:hover {
-    opacity: 0.9;
+    background-color: rgba(46, 161, 28, 1);
   }
 `;
 export const FooterText = styled.p`
