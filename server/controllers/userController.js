@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import transporter from "../config/nodeMailer.js";
 
-
 export const register = async (req, res, next) => {
   const { name, email, password } = req.body;
 
