@@ -46,7 +46,7 @@ export default function SongLists() {
         </Modal>
       )}
       <Container>
-        {!songs
+        {songs.length === 0
           ? "No Song "
           : songs.map((song, index) => (
               <div key={song._id}>
