@@ -26,7 +26,7 @@ const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isLoading, error, token } = useSelector((state) => state.auth);
+  const { user, isLoading, error } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -43,10 +43,10 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (user && token) {
+    if (user) {
       navigate("/songs");
     }
-  }, [user, token, navigate]);
+  }, [user, navigate]);
 
   const toggleMode = () => {
     setIsSignup((prev) => !prev);

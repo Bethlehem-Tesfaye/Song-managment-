@@ -3,10 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const authSLice = createSlice({
   name: "auth",
   initialState: {
-    user: {},
+    user: null,
     isLoading: false,
     error: null,
-    token: null,
     isPasswordResetSuccess: false,
     isLoggedOut: false
   },
@@ -14,40 +13,34 @@ const authSLice = createSlice({
     registerUserRequest(state) {
       state.isLoading = true;
       state.error = null;
-      state.token = null;
-      state.isLoggedOut = false; // reset on register
+      state.isLoggedOut = false;
     },
     registerUserSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       state.user = action.payload.userData;
-      state.token = action.payload.token;
-      state.isLoggedOut = false; // reset on register
+      state.isLoggedOut = false;
     },
     registerUserFailure(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-      state.token = null;
       state.user = {};
-      state.isLoggedOut = false; // reset on register fail
+      state.isLoggedOut = false;
     },
     loginUserRequest(state) {
       state.isLoading = true;
       state.error = null;
-      state.token = null;
-      state.isLoggedOut = false; // reset on login
+      state.isLoggedOut = false;
     },
     loginUserSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
       state.user = action.payload.userData;
-      state.token = action.payload.token;
-      state.isLoggedOut = false; // reset on login success
+      state.isLoggedOut = false;
     },
     loginUserFailure(state, action) {
       state.isLoading = false;
       state.error = action.payload;
-      state.token = null;
       state.user = {};
       state.isLoggedOut = false; // reset on login fail
     },
@@ -57,8 +50,7 @@ const authSLice = createSlice({
     },
     logoutSuccess(state) {
       state.isLoading = false;
-      state.token = null;
-      state.user = {};
+      state.user = null;
       state.error = null;
       state.isLoggedOut = true; // <--- set flag here
     },

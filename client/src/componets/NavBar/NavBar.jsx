@@ -18,7 +18,7 @@ function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isDark } = useSelector((state) => state.theme);
-  const { token, isLoggedOut } = useSelector((state) => state.auth);
+  const { user, isLoggedOut } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logoutRequest());
@@ -43,7 +43,7 @@ function NavBar() {
           Add
         </AddButton>
 
-        {token ? (
+        {user ? (
           <AddButton onClick={handleLogout}>Logout</AddButton>
         ) : (
           <Link to="/login">

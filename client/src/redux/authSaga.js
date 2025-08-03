@@ -23,21 +23,14 @@ import {
   forgotPasswordApi,
   resetPasswordApi
 } from "./api.js";
-import Cookies from "js-cookie";
 import { clearSongs } from "./feature/songsSLice.js";
 
 function* handleRegisterUser({ payload }) {
   try {
     const newUser = payload;
     const response = yield call(registerUserApi, newUser);
-    const { token, userData } = response.data;
-    Cookies.set("token", token, {
-      secure: process.env.NODE_ENV === "production",
-      expires: 7,
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
-    });
-
-    yield put(registerUserSuccess({ token, userData }));
+    const { userData } = response.data;
+    yield put(registerUserSuccess({ userData }));
   } catch (error) {
     yield put(registerUserFailure(error.message || "Failed to register user"));
   }
@@ -47,14 +40,8 @@ function* handleLoginUser({ payload }) {
   try {
     const user = payload;
     const response = yield call(loginUserApi, user);
-    const { token, userData } = response.data;
-    Cookies.set("token", token, {
-      secure: process.env.NODE_ENV === "production",
-      expires: 7,
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
-    });
-
-    yield put(loginUserSuccess({ token, userData }));
+    const { userData } = response.data;
+    yield put(loginUserSuccess({ userData }));
   } catch (error) {
     yield put(loginUserFailure(error.message || "Failed to register user"));
   }

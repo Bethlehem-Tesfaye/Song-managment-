@@ -6,6 +6,14 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import transporter from "../config/nodeMailer.js";
 
+const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production", // HTTPS only in production
+  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax", // cross-site cookie in prod
+  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  path: "/"
+};
+
 export const register = async (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -26,15 +34,16 @@ export const register = async (req, res, next) => {
     await newUser.save();
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "5h"
+      expiresIn: "7d"
     });
+
+    res.cookie("token", token, cookieOptions);
 
     return res.json({
       userData: {
         name: newUser.name,
         email: newUser.email
-      },
-      token
+      }
     });
   } catch (error) {
     return next(error);
@@ -59,23 +68,20 @@ export const login = async (req, res, next) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    res.cookie("token", token, cookieOptions);
 
     res.json({
       userData: {
         name: user.name,
         email: user.email
-      },
-      token
+      }
     });
   } catch (error) {
     return next(error);
   }
 };
 export const logout = (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    sameSite: "lax"
-  });
+  res.clearCookie("token", cookieOptions);
   res.status(200).json({ message: "Logged out successfully" });
 };
 export const forgetPassword = async (req, res, next) => {

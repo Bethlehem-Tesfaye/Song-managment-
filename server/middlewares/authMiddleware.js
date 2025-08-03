@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import CustomError from "../utils/customError.js";
 
 const authMiddleware = (req, res, next) => {
-  const token = req.cookies?.token;
+  const { token } = req.cookies;
 
   if (!token) {
     return next(new CustomError("Unauthorized: No token provided", 401));
