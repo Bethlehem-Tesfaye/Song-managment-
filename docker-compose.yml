@@ -1,0 +1,43 @@
+# specify the version of docker-compose
+version: "3.8"
+
+services:
+  web:
+    depends_on: 
+      - api
+    build: ./client
+    ports:
+      - "8080:8080"
+    environment:
+      API_BASE_URL: http://localhost:5000
+
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/package-lock.json
+          action: rebuild
+        - path: ./client
+          target: /app
+          action: sync
+
+  api: 
+    build: ./server
+    
+    ports: 
+      - 5000:5000
+    env_file:
+    - ./server/.env
+    
+    develop:
+      watch:
+        - path: ./server/package.json
+          action: rebuild
+        - path: ./server/package-lock.json
+          action: rebuild
+        
+        - path: ./server
+          target: /app
+          action: sync
+
+  
