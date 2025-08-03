@@ -32,10 +32,8 @@ module.exports = {
     new Dotenv({
       systemvars: true
     }),
-     new CopyWebpackPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, "public/_redirects"), to: "" }
-      ]
+    new CopyWebpackPlugin({
+      patterns: [{ from: path.resolve(__dirname, "public/_redirects"), to: "" }]
     })
   ],
   devServer: {
