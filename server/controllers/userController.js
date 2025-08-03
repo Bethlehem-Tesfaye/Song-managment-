@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import transporter from "../config/nodeMailer.js";
 
+
 export const register = async (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -74,7 +75,6 @@ export const login = async (req, res, next) => {
 export const logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
     sameSite: "lax"
   });
   res.status(200).json({ message: "Logged out successfully" });
