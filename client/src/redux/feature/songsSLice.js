@@ -67,6 +67,13 @@ export const songsSLice = createSlice({
     deleteSongFailure: (state, action) => {
       state.isLoading = false;
       state.error = null;
+    },
+    clearSongs: (state) => {
+      state.songs = [];
+      state.page = 1;
+      state.totalPage = null;
+      state.isLoading = false;
+      state.error = null;
     }
   }
 });
@@ -83,7 +90,8 @@ export const {
   updateSongFailure,
   deleteSongRequest,
   deleteSongSuccess,
-  deleteSongFailure
+  deleteSongFailure,
+  clearSongs
 } = songsSLice.actions;
 
 export default songsSLice.reducer;

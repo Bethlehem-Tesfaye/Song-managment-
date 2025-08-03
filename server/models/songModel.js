@@ -6,7 +6,12 @@ const songSchema = new mongoose.Schema(
     artist: { type: String, required: true },
     album: { type: String, required: true },
     year: { type: Number, required: true },
-    genre: { type: String }
+    genre: { type: String },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    }
   },
   { timestamps: true }
 );

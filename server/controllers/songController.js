@@ -2,22 +2,26 @@ import songModel from "../models/songModel.js";
 import CustomError from "../utils/customError.js";
 
 export const createSong = async (req, res, next) => {
+  const { userId } = req;
   const { title, artist, album, year, genre } = req.body;
 
   if (!title || !artist || !album || !year) {
     return next(new CustomError("all fields required", 400));
   }
+  console.log("userId in controller:", req.userId);
+
   try {
     const newSong = new songModel({
       title,
       artist,
       album,
       year,
-      genre
+      genre,
+      userId
     });
     await newSong.save();
     return res
-      .status(200)
+      .status(201)
       .json({ success: true, song: newSong, message: "Song added" });
   } catch (error) {
     return next(error);
@@ -25,13 +29,14 @@ export const createSong = async (req, res, next) => {
 };
 
 export const getSongs = async (req, res, next) => {
+  const { userId } = req;
   const page = parseInt(req.query.page) || 1;
   const songPerPage = 5;
 
   try {
-    const totalSongs = await songModel.countDocuments();
+    const totalSongs = await songModel.countDocuments({ userId });
     const songs = await songModel
-      .find()
+      .find({ userId })
       .skip((page - 1) * songPerPage)
       .limit(songPerPage);
     if (songs.length === 0) {
@@ -53,15 +58,25 @@ export const getSongs = async (req, res, next) => {
 };
 
 export const updateSong = async (req, res, next) => {
-  const id = req.params.id;
+  const { song } = req;
   const updateSong = req.body;
+  if (
+    !updateSong.title ||
+    !updateSong.artist ||
+    !updateSong.album ||
+    !updateSong.year
+  ) {
+    return next(new CustomError("All fields required", 400));
+  }
   try {
-    const song = await songModel.findByIdAndUpdate(id, updateSong, {
-      new: true
-    });
-    if (!song) {
-      return next(new CustomError("song not found", 404));
-    }
+    song.title = updateSong.title;
+    song.artist = updateSong.artist;
+    song.album = updateSong.album;
+    song.year = updateSong.year;
+    song.genre = updateSong.genre;
+
+    await song.save();
+
     return res.status(200).json({
       success: true,
       song: song,
@@ -73,12 +88,9 @@ export const updateSong = async (req, res, next) => {
 };
 
 export const deleteSong = async (req, res, next) => {
-  const id = req.params.id;
+  const { song } = req;
   try {
-    const song = await songModel.findByIdAndDelete(id);
-    if (!song) {
-      return next(new CustomError("song not found", 404));
-    }
+    await song.deleteOne();
     return res
       .status(200)
       .json({ success: true, message: "Song deleted successfully" });

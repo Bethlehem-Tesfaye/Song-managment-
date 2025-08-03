@@ -5,12 +5,14 @@ import {
   getSongs,
   updateSong
 } from "../controllers/songController.js";
+import authMiddelware from "../middlewares/authMiddleware.js";
+import { isSongOwner } from "../middlewares/isSongOwner.js";
 
 const router = express.Router();
 
-router.post("/", createSong);
-router.get("/", getSongs);
-router.put("/:id", updateSong);
-router.delete("/:id", deleteSong);
+router.post("/", authMiddelware, createSong);
+router.get("/", authMiddelware, getSongs);
+router.put("/:id", authMiddelware, isSongOwner, updateSong);
+router.delete("/:id", authMiddelware, isSongOwner, deleteSong);
 
 export default router;
