@@ -31,7 +31,11 @@ function* handleRegisterUser({ payload }) {
     const newUser = payload;
     const response = yield call(registerUserApi, newUser);
     const { token, userData } = response.data;
-    Cookies.set("token", token, { expires: 7, sameSite: "Lax" });
+    Cookies.set("token", token, {
+      secure: process.env.NODE_ENV === "production",
+      expires: 7,
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
+    });
 
     yield put(registerUserSuccess({ token, userData }));
   } catch (error) {
@@ -44,7 +48,11 @@ function* handleLoginUser({ payload }) {
     const user = payload;
     const response = yield call(loginUserApi, user);
     const { token, userData } = response.data;
-    Cookies.set("token", token, { expires: 7, sameSite: "Lax" });
+    Cookies.set("token", token, {
+      secure: process.env.NODE_ENV === "production",
+      expires: 7,
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax"
+    });
 
     yield put(loginUserSuccess({ token, userData }));
   } catch (error) {
