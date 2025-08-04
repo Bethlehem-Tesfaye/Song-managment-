@@ -5,6 +5,7 @@ import LoginPage from "./pages/loginPage/LoginPage.jsx";
 import ForgotPasswordPage from "./pages/forgotPassword/ForgotPassword.jsx";
 import ResetPasswordPage from "./pages/resetPassword/ResetPasswordPage.jsx";
 import LandingPage from "./pages/landingPage/LandingPage.jsx";
+import Stats from "./pages/Stats/Stats.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/stats" element={<Stats />} />
       </Routes>
     </BrowserRouter>
   );
