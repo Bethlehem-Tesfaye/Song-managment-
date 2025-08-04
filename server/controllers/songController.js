@@ -5,11 +5,6 @@ export const createSong = async (req, res, next) => {
   const { userId } = req;
   const { title, artist, album, year, genre } = req.body;
 
-  if (!title || !artist || !album || !year) {
-    return next(new CustomError("all fields required", 400));
-  }
-  console.log("userId in controller:", req.userId);
-
   try {
     const newSong = new songModel({
       title,
@@ -59,21 +54,17 @@ export const getSongs = async (req, res, next) => {
 
 export const updateSong = async (req, res, next) => {
   const { song } = req;
-  const updateSong = req.body;
-  if (
-    !updateSong.title ||
-    !updateSong.artist ||
-    !updateSong.album ||
-    !updateSong.year
-  ) {
+  const { title, artist, album, year, genre } = req.body;
+
+  if (!title || !artist || !album || !year) {
     return next(new CustomError("All fields required", 400));
   }
   try {
-    song.title = updateSong.title;
-    song.artist = updateSong.artist;
-    song.album = updateSong.album;
-    song.year = updateSong.year;
-    song.genre = updateSong.genre;
+    song.title = title;
+    song.artist = artist;
+    song.album = album;
+    song.year = year;
+    song.genre = genre;
 
     await song.save();
 

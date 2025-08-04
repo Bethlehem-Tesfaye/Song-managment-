@@ -6,13 +6,28 @@ import {
   register,
   resetPassword
 } from "../controllers/userController.js";
+import { validate } from "../middlewares/validate.js";
+import {
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  resetPasswordSchema
+} from "../schema/authSchema.js";
 
 const authRouter = express.Router();
 
-authRouter.post("/register", register);
-authRouter.post("/login", login);
+authRouter.post("/register", validate(registerSchema), register);
+authRouter.post("/login", validate(loginSchema), login);
 authRouter.post("/logout", logout);
-authRouter.post("/forgot-password", forgetPassword);
-authRouter.patch("/reset-password", resetPassword);
+authRouter.post(
+  "/forgot-password",
+  validate(forgotPasswordSchema),
+  forgetPassword
+);
+authRouter.patch(
+  "/reset-password",
+  validate(resetPasswordSchema),
+  resetPassword
+);
 
 export default authRouter;
