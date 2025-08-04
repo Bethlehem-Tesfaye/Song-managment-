@@ -47,7 +47,7 @@ function NavBar() {
           <AddButton>Stats</AddButton>
         </Link>
 
-        {user ? (
+        {!isLoggedOut ? (
           <AddButton onClick={handleLogout}>Logout</AddButton>
         ) : (
           <Link to="/login">
