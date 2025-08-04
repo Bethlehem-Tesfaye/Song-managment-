@@ -44,3 +44,9 @@ export const forgotPasswordApi = async (email) => {
 export const resetPasswordApi = async (data) => {
   return await axios.patch(`${baseURL}/api/auth/reset-password`, data);
 };
+
+// stats
+
+export const statsApi = async () => {
+  return await axios.get(`${baseURL}/api/stats`);
+};

@@ -43,6 +43,10 @@ function NavBar() {
           Add
         </AddButton>
 
+        <Link to="/stats">
+          <AddButton>Stats</AddButton>
+        </Link>
+
         {user ? (
           <AddButton onClick={handleLogout}>Logout</AddButton>
         ) : (
